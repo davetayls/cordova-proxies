@@ -1,0 +1,24 @@
+{
+  "name": "cordova-proxies",
+  "version": "0.0.0",
+  "homepage": "https://github.com/davetayls/cordova-proxies",
+  "authors": [
+    "davetayls <dave@the-taylors.org>"
+  ],
+  "description": "Proxy libraries for working with device capabilities in cordova",
+  "main": "amd/index.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "cordova"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
