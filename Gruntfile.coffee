@@ -53,6 +53,6 @@ module.exports = (grunt) ->
       copy:
         dist:
           src: 'tmp/index.js'
-          dest: 'cordova-proxies.js'
+          dest: 'cordova_proxies.js'
 
   grunt.registerTask 'default', ['coffee', 'amdwrap', 'requirejs', 'copy']
