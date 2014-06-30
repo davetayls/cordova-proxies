@@ -1,11 +1,10 @@
 
   'use strict'
 
-  Q = require 'q'
   $ = require 'jquery'
   splashscreen = require './splashscreen'
 
-  d = Q.defer()
+  d = $.Deferred()
 
   _deviceReady = ->
     splashscreen.show()
@@ -14,5 +13,5 @@
   document.addEventListener('deviceready', _deviceReady, false)
   if !window.cordova then $(-> d.resolve())
 
-  exports.whenReady = d.promise
+  exports.whenReady = d.promise()
 

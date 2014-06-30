@@ -1,13 +1,11 @@
 define(function (require, exports, module) {'use strict';
-var $, Q, d, splashscreen, _deviceReady;
-
-Q = require('q');
+var $, d, splashscreen, _deviceReady;
 
 $ = require('jquery');
 
 splashscreen = require('./splashscreen');
 
-d = Q.defer();
+d = $.Deferred();
 
 _deviceReady = function() {
   splashscreen.show();
@@ -22,6 +20,6 @@ if (!window.cordova) {
   });
 }
 
-exports.whenReady = d.promise;
+exports.whenReady = d.promise();
 
 });

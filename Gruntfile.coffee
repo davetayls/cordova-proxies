@@ -31,6 +31,7 @@ module.exports = (grunt) ->
             appDir: 'amd'
             baseUrl: './'
             dir: 'tmp'
+            optimize: 'none'
             allowSourceOverwrites: true
             findNestedDependencies: true
 
@@ -38,7 +39,6 @@ module.exports = (grunt) ->
               underscore: '../bower_components/underscore/underscore'
               backbone: '../bower_components/backbone/backbone'
               jquery: '../bower_components/jquery/dist/jquery'
-              q: '../bower_components/q/q'
 
             modules: [
               name: 'index'
@@ -55,4 +55,4 @@ module.exports = (grunt) ->
           src: 'tmp/index.js'
           dest: 'cordova_proxies.js'
 
-  grunt.registerTask 'default', ['coffee', 'amdwrap', 'requirejs', 'copy']
+  grunt.registerTask 'default', ['coffee', 'amdwrap']
