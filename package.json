@@ -1,0 +1,31 @@
+{
+  "name": "cordova-proxies",
+  "version": "0.0.0",
+  "description": "Proxy libraries for working with device capabilities in cordova",
+  "main": "src/index.coffee",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/davetayls/cordova-proxies.git"
+  },
+  "keywords": [
+    "cordova"
+  ],
+  "author": "davetayls",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davetayls/cordova-proxies/issues"
+  },
+  "homepage": "https://github.com/davetayls/cordova-proxies",
+  "devDependencies": {
+    "grunt-amd-wrap": "^1.0.1",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt": "^0.4.5",
+    "load-grunt-config": "^0.10.0",
+    "grunt-requirejs": "^0.4.2",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
