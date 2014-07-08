@@ -6,6 +6,8 @@ exports.keyboard = require('./keyboard');
 
 exports.ready = require('./ready');
 
+exports.media = require('./media');
+
 exports.splashscreen = require('./splashscreen');
 
 exports.statusbar = require('./statusbar');
