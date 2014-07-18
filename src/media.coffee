@@ -1,6 +1,7 @@
 
+_ = require 'underscore'
 
-class SoundManagerMedia
+class MediaProxy
   @MEDIA_NONE: 0
   @MEDIA_STARTING: 1
   @MEDIA_RUNNING: 2
@@ -9,7 +10,7 @@ class SoundManagerMedia
 
   constructor: (@url, @mediaSuccess, @mediaError, @mediaStatus) ->
     if window.Media
-      @media = new window.Media(@_normalizeUrl(), @mediaSuccess, @mediaError, @mediaStatus)
+      @media = new window.Media(@_normalizeUrl(), @mediaSuccess, @mediaError, @_statusChange)
     else
       @media = new Audio(@url)
 
@@ -18,8 +19,21 @@ class SoundManagerMedia
       "/android_asset/#{@url}"
     else @url
 
+  _statusChange: (status) =>
+    @currentStatus = status
+    console.log 'Media status', status
+    _.result(@mediaStatus)
+    return
+
   play: -> @media.play()
 
   pause: -> @media.pause()
 
-module.exports = SoundManagerMedia
+  stop: ->
+    unless @currentStatus is MediaProxy.MEDIA_STOPPED
+      console.log 'Stopping media'
+      @media.stop()
+
+  release: -> @media.release()
+
+module.exports = MediaProxy
