@@ -6,7 +6,15 @@
     "davetayls <dave@the-taylors.org>"
   ],
   "description": "Proxy libraries for working with device capabilities in cordova",
-  "main": "amd/index.js",
+  "main": [
+    "amd/**/*.js",
+    "amd/**/*.js.map",
+    "amd/**/*.d.ts",
+    "amd/**/*.hbs",
+    "amd/**/*.json",
+    "src/**/*.less",
+    "src/**/*.css"
+  ],
   "moduleType": [
     "amd"
   ],
@@ -16,6 +24,7 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "Gruntfile.*",
     "node_modules",
     "bower_components",
     "test",
