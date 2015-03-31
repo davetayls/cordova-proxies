@@ -66,6 +66,10 @@ declare module '__cordova_proxies/keyboard' {
         * Whether or not the keyboard is currently visible.
         */
     export function isVisible(): boolean;
+    export interface IKeyboardShowEvent extends Event {
+            keyboardHeight: number;
+    }
+    export function listenToShow(listener: (e: IKeyboardShowEvent) => void): void;
 }
 
 declare module '__cordova_proxies/ready' {

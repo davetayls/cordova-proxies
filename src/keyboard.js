@@ -47,5 +47,9 @@ function isVisible() {
     return cordova.plugins.Keyboard.isVisible;
 }
 exports.isVisible = isVisible;
+function listenToShow(listener) {
+    window.addEventListener('native.keyboardshow', listener);
+}
+exports.listenToShow = listenToShow;
 //# sourceMappingURL=keyboard.js.map
 });

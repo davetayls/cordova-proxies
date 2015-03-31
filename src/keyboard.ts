@@ -45,3 +45,12 @@ export function isVisible(): boolean {
   if (!cordovaProxy.isAvailable()) return;
   return cordova.plugins.Keyboard.isVisible;
 }
+
+export interface IKeyboardShowEvent extends Event {
+  keyboardHeight:number;
+}
+
+export function listenToShow(listener:(e:IKeyboardShowEvent) => void):void {
+  window.addEventListener('native.keyboardshow', listener);
+}
+
