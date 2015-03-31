@@ -1,4 +1,6 @@
-define(function (require, exports, module) {/**
+/// <reference path="../typings/tsd.d.ts" />
+var cordovaProxy = require('./cordova');
+/**
  * Keyboard helpers
  *
  * Requires:
@@ -11,6 +13,8 @@ define(function (require, exports, module) {/**
  * @param hide
  */
 function hideKeyboardAccessoryBar(hide) {
+    if (!cordovaProxy.isAvailable())
+        return;
     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(hide);
 }
 exports.hideKeyboardAccessoryBar = hideKeyboardAccessoryBar;
@@ -18,6 +22,8 @@ exports.hideKeyboardAccessoryBar = hideKeyboardAccessoryBar;
  * Close the keyboard if it is open.
  */
 function close() {
+    if (!cordovaProxy.isAvailable())
+        return;
     cordova.plugins.Keyboard.close();
 }
 exports.close = close;
@@ -27,6 +33,8 @@ exports.close = close;
  * @param disbale
  */
 function disableScroll(disable) {
+    if (!cordovaProxy.isAvailable())
+        return;
     cordova.plugins.Keyboard.disableScroll(disable);
 }
 exports.disableScroll = disableScroll;
@@ -34,8 +42,9 @@ exports.disableScroll = disableScroll;
  * Whether or not the keyboard is currently visible.
  */
 function isVisible() {
+    if (!cordovaProxy.isAvailable())
+        return;
     return cordova.plugins.Keyboard.isVisible;
 }
 exports.isVisible = isVisible;
 //# sourceMappingURL=keyboard.js.map
-});

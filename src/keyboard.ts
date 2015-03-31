@@ -1,3 +1,7 @@
+/// <reference path="../typings/tsd.d.ts" />
+
+import cordovaProxy = require('./cordova');
+
 /**
  * Keyboard helpers
  *
@@ -12,6 +16,7 @@
  * @param hide
  */
 export function hideKeyboardAccessoryBar(hide:boolean): void {
+  if (!cordovaProxy.isAvailable()) return;
   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(hide);
 }
 
@@ -19,6 +24,7 @@ export function hideKeyboardAccessoryBar(hide:boolean): void {
  * Close the keyboard if it is open.
  */
 export function close(): void {
+  if (!cordovaProxy.isAvailable()) return;
   cordova.plugins.Keyboard.close();
 }
 
@@ -28,6 +34,7 @@ export function close(): void {
  * @param disbale
  */
 export function disableScroll(disable:boolean): void {
+  if (!cordovaProxy.isAvailable()) return;
   cordova.plugins.Keyboard.disableScroll(disable);
 }
 
@@ -35,5 +42,6 @@ export function disableScroll(disable:boolean): void {
  * Whether or not the keyboard is currently visible.
  */
 export function isVisible(): boolean {
+  if (!cordovaProxy.isAvailable()) return;
   return cordova.plugins.Keyboard.isVisible;
 }
