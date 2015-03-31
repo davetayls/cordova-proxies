@@ -12,9 +12,9 @@ module.exports = function (grunt){
   grunt.registerTask('release', function (release){
     release = release || 'patch';
     grunt.task.run([
-      "bump-only:#{release}",
+      'bump-only:' + release,
       'build',
-      "bump-commit"
+      'bump-commit'
     ]);
   });
 
