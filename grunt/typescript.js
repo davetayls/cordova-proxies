@@ -4,7 +4,7 @@ module.exports = {
     module: 'commonjs',
     target: 'es5',
     sourceMap: true,
-    declaration: false,
+    declaration: true,
     noImplicitAny: true
   },
   src: {
