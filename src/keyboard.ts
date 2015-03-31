@@ -54,3 +54,7 @@ export function listenToShow(listener:(e:IKeyboardShowEvent) => void):void {
   window.addEventListener('native.keyboardshow', listener);
 }
 
+export function listenToHide(listener:(e:Event) => void):void {
+  window.addEventListener('native.keyboardhide', listener);
+}
+

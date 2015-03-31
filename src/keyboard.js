@@ -1,4 +1,4 @@
-define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 var cordovaProxy = require('./cordova');
 /**
  * Keyboard helpers
@@ -51,5 +51,8 @@ function listenToShow(listener) {
     window.addEventListener('native.keyboardshow', listener);
 }
 exports.listenToShow = listenToShow;
+function listenToHide(listener) {
+    window.addEventListener('native.keyboardhide', listener);
+}
+exports.listenToHide = listenToHide;
 //# sourceMappingURL=keyboard.js.map
-});
