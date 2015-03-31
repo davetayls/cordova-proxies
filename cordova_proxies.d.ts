@@ -70,6 +70,7 @@ declare module '__cordova_proxies/keyboard' {
             keyboardHeight: number;
     }
     export function listenToShow(listener: (e: IKeyboardShowEvent) => void): void;
+    export function listenToHide(listener: (e: Event) => void): void;
 }
 
 declare module '__cordova_proxies/ready' {
