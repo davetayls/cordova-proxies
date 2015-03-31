@@ -1,0 +1,33 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "cordova/cordova.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "cordova-ionic/cordova-ionic.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "cordovarduino/cordovarduino.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "modernizr/modernizr.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "underscore/underscore.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "cordova-ionic/plugins/keyboard.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    },
+    "backbone/backbone.d.ts": {
+      "commit": "02a93db66ab297f542db1ec9f91de9935f7ff567"
+    }
+  }
+}
