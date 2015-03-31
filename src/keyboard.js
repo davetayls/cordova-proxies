@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
 var cordovaProxy = require('./cordova');
 /**
  * Keyboard helpers
@@ -48,3 +48,4 @@ function isVisible() {
 }
 exports.isVisible = isVisible;
 //# sourceMappingURL=keyboard.js.map
+});
