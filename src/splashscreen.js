@@ -17,5 +17,5 @@ function hide() {
     }
 }
 exports.hide = hide;
-//# sourceMappingURL=splashscreen.js.map
+
 });

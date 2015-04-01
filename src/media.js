@@ -57,5 +57,5 @@ var MediaProxy = (function () {
     return MediaProxy;
 })();
 exports.MediaProxy = MediaProxy;
-//# sourceMappingURL=media.js.map
+
 });

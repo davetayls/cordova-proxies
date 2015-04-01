@@ -7,5 +7,5 @@ function isAndroid() {
     return (/android/i).test(device.platform);
 }
 exports.isAndroid = isAndroid;
-//# sourceMappingURL=device.js.map
+
 });

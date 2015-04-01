@@ -4,6 +4,7 @@
 
 declare module 'cordova_proxies' {
     export import browser = require('__cordova_proxies/browser');
+    export import core = require('__cordova_proxies/core');
     export import file = require('__cordova_proxies/file');
     export import keyboard = require('__cordova_proxies/keyboard');
     export import ready = require('__cordova_proxies/ready');
@@ -39,6 +40,10 @@ declare module '__cordova_proxies/browser' {
         close(): void;
         show(): any;
     }
+}
+
+declare module '__cordova_proxies/core' {
+    export function isAvailable(): boolean;
 }
 
 declare module '__cordova_proxies/file' {

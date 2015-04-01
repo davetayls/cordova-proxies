@@ -11,5 +11,5 @@ if (typeof cordova === 'undefined') {
     $(d.resolve);
 }
 exports.whenReady = d.promise();
-//# sourceMappingURL=ready.js.map
+
 });

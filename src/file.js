@@ -34,5 +34,5 @@ function syncLocal(name, url, opts, cb) {
     });
 }
 exports.syncLocal = syncLocal;
-//# sourceMappingURL=file.js.map
+
 });

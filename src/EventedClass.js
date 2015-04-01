@@ -8,5 +8,5 @@ var EventedClass = (function () {
 })();
 exports.EventedClass = EventedClass;
 _.extend(EventedClass.prototype, Backbone.Events);
-//# sourceMappingURL=EventedClass.js.map
+
 });

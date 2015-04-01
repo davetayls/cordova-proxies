@@ -3,7 +3,7 @@ module.exports = {
   options: {
     module: 'commonjs',
     target: 'es5',
-    sourceMap: true,
+    sourceMap: false,
     declaration: true,
     noImplicitAny: true
   },

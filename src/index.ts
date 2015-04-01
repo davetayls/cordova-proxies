@@ -1,5 +1,6 @@
 
 export import browser = require('./browser');
+export import core = require('./core');
 export import file = require('./file');
 export import keyboard = require('./keyboard');
 export import ready = require('./ready');

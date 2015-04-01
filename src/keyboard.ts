@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
 
-import cordovaProxy = require('./cordova');
+import cordovaProxy = require('./core');
 
 /**
  * Keyboard helpers

@@ -1,5 +1,5 @@
 define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
-var cordovaProxy = require('./cordova');
+var cordovaProxy = require('./core');
 /**
  * Keyboard helpers
  *
@@ -55,5 +55,5 @@ function listenToHide(listener) {
     window.addEventListener('native.keyboardhide', listener);
 }
 exports.listenToHide = listenToHide;
-//# sourceMappingURL=keyboard.js.map
+
 });

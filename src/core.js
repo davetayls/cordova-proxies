@@ -3,5 +3,5 @@ function isAvailable() {
     return typeof cordova !== 'undefined';
 }
 exports.isAvailable = isAvailable;
-//# sourceMappingURL=cordova.js.map
+
 });

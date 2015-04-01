@@ -84,5 +84,5 @@ var BrowserRequest = (function (_super) {
     return BrowserRequest;
 })(EventedClass.EventedClass);
 exports.BrowserRequest = BrowserRequest;
-//# sourceMappingURL=browser.js.map
+
 });
