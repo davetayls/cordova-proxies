@@ -1,4 +1,4 @@
-define(function (require, exports, module) {/**
+/**
  * Status bar helpers
  *
  * This requires the following cordova plugins:
@@ -15,5 +15,3 @@ function deviceReady() {
     Modernizr.addTest('ios7', ios7);
 }
 document.addEventListener('deviceready', deviceReady, false);
-
-});

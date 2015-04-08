@@ -7,3 +7,11 @@ export function isIOS():boolean {
 export function isAndroid():boolean {
   return (/android/i).test(device.platform)
 }
+
+export function isAmazonFireOS():boolean {
+  return (/amazon-fireos/i).test(device.platform)
+}
+
+export function isAndroidBased():boolean {
+  return isAndroid() || isAmazonFireOS();
+}

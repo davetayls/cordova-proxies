@@ -1,4 +1,4 @@
-define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 var _ = require('underscore');
 function syncLocal(name, url, opts, cb) {
     console.log('file#syncLocal', name, url);
@@ -34,5 +34,3 @@ function syncLocal(name, url, opts, cb) {
     });
 }
 exports.syncLocal = syncLocal;
-
-});
