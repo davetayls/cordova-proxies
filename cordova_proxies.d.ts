@@ -9,6 +9,7 @@ declare module 'cordova_proxies' {
     export import keyboard = require('__cordova_proxies/keyboard');
     export import ready = require('__cordova_proxies/ready');
     export import media = require('__cordova_proxies/media');
+    export import pushNotification = require('__cordova_proxies/pushNotification');
     export import splashscreen = require('__cordova_proxies/splashscreen');
     export import statusbar = require('__cordova_proxies/statusbar');
 }
@@ -110,6 +111,17 @@ declare module '__cordova_proxies/media' {
         stop(): void;
         release(): void;
     }
+}
+
+declare module '__cordova_proxies/pushNotification' {
+    /***
+      * Push notification helpers
+      *
+      * Requires:
+      * https://github.com/phonegap-build/PushPlugin
+      * https://github.com/apache/cordova-plugin-device
+      */
+    export var noop: () => void;
 }
 
 declare module '__cordova_proxies/splashscreen' {

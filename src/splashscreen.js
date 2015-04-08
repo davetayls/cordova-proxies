@@ -1,4 +1,4 @@
-/***
+define(function (require, exports, module) {/***
  * Splash screen helpers
  *
  * Requires:
@@ -17,3 +17,5 @@ function hide() {
     }
 }
 exports.hide = hide;
+
+});

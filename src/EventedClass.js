@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
 var Backbone = require('backbone');
 var _ = require('underscore');
 var EventedClass = (function () {
@@ -8,3 +8,5 @@ var EventedClass = (function () {
 })();
 exports.EventedClass = EventedClass;
 _.extend(EventedClass.prototype, Backbone.Events);
+
+});

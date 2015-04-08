@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
 var deviceProxy = require('./device');
 var MediaProxy = (function () {
     function MediaProxy(url, mediaSuccess, mediaError, mediaStatus) {
@@ -57,3 +57,5 @@ var MediaProxy = (function () {
     return MediaProxy;
 })();
 exports.MediaProxy = MediaProxy;
+
+});
