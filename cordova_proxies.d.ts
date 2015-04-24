@@ -60,6 +60,16 @@ declare module '__cordova_proxies/file' {
 }
 
 declare module '__cordova_proxies/keyboard' {
+    import EventedClass = require('__cordova_proxies/EventedClass');
+    export var CHANGED_EVENT: string;
+    export class KeyboardState extends EventedClass.EventedClass {
+            constructor();
+            keyboardIsOpen: boolean;
+            keyboardHeight: number;
+            focusedElement: JQuery;
+    }
+    export var currentState: KeyboardState;
+    export var activeEl: Element;
     /**
         * Hide the keyboard accessory bar with the next, previous and done buttons.
         *
@@ -85,6 +95,8 @@ declare module '__cordova_proxies/keyboard' {
     }
     export function listenToShow(listener: (e: IKeyboardShowEvent) => void): void;
     export function listenToHide(listener: (e: Event) => void): void;
+    export function listenToChanged(listener: (state: KeyboardState) => void): void;
+    export function stopListeningToChanged(listener: (state: KeyboardState) => void): void;
 }
 
 declare module '__cordova_proxies/ready' {
