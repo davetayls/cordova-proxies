@@ -1,12 +1,12 @@
-define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
-var cordovaProxy = require('./core');
-/**
+define(function (require, exports, module) {/**
  * Keyboard helpers
  *
  * Requires:
+ * cordova plugin add com.ionic.keyboard --save
  * http://plugins.cordova.io/#/package/com.ionic.keyboard
  */
 /// <reference path="../typings/tsd.d.ts" />
+var cordovaProxy = require('./core');
 /**
  * Hide the keyboard accessory bar with the next, previous and done buttons.
  *

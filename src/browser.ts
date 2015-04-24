@@ -2,6 +2,8 @@
 
 import _ = require('underscore');
 import EventedClass = require('./EventedClass');
+import core = require('./core');
+import ready = require('./ready');
 
 export interface IRequestWindow extends Window {
   show():void;
@@ -12,6 +14,10 @@ export interface IPostMessageEvent extends Event {
   origin:string;
   source:Window;
 }
+
+ready.whenReady.done(() => {
+  if (core.isAvailable()) window.open = cordova.InAppBrowser.open;
+});
 
 export class BrowserRequest extends EventedClass.EventedClass {
   constructor(url:string) {

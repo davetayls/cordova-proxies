@@ -6,7 +6,50 @@
 // Copyright (c) Microsoft Open Technologies, Inc.
 // Licensed under the MIT license.
 
+interface Cordova {
+    InAppBrowser: InAppBrowserNamespace;
+}
+
 interface Window {
+    /**
+     * Opens a URL in a new InAppBrowser instance, the current browser instance, or the system browser.
+     * @param  url     The URL to load.
+     * @param  target  The target in which to load the URL, an optional parameter that defaults to _self.
+     * @param  options Options for the InAppBrowser. Optional, defaulting to: location=yes.
+     *                 The options string must not contain any blank space, and each feature's
+     *                 name/value pairs must be separated by a comma. Feature names are case insensitive.
+     */
+    open(url: string, target?: "_self", options?: string): InAppBrowser;
+    /**
+     * Opens a URL in a new InAppBrowser instance, the current browser instance, or the system browser.
+     * @param  url     The URL to load.
+     * @param  target  The target in which to load the URL, an optional parameter that defaults to _self.
+     * @param  options Options for the InAppBrowser. Optional, defaulting to: location=yes.
+     *                 The options string must not contain any blank space, and each feature's
+     *                 name/value pairs must be separated by a comma. Feature names are case insensitive.
+     */
+    open(url: string, target?: "_blank", options?: string): InAppBrowser;
+    /**
+     * Opens a URL in a new InAppBrowser instance, the current browser instance, or the system browser.
+     * @param  url     The URL to load.
+     * @param  target  The target in which to load the URL, an optional parameter that defaults to _self.
+     * @param  options Options for the InAppBrowser. Optional, defaulting to: location=yes.
+     *                 The options string must not contain any blank space, and each feature's
+     *                 name/value pairs must be separated by a comma. Feature names are case insensitive.
+     */
+    open(url: string, target?: "_system", options?: string): InAppBrowser;
+    /**
+     * Opens a URL in a new InAppBrowser instance, the current browser instance, or the system browser.
+     * @param  url     The URL to load.
+     * @param  target  The target in which to load the URL, an optional parameter that defaults to _self.
+     * @param  options Options for the InAppBrowser. Optional, defaulting to: location=yes.
+     *                 The options string must not contain any blank space, and each feature's
+     *                 name/value pairs must be separated by a comma. Feature names are case insensitive.
+     */
+    open(url: string, target?: string, options?: string, replace?: boolean): InAppBrowser;
+}
+
+interface InAppBrowserNamespace {
     /**
      * Opens a URL in a new InAppBrowser instance, the current browser instance, or the system browser.
      * @param  url     The URL to load.

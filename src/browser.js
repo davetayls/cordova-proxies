@@ -7,6 +7,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var _ = require('underscore');
 var EventedClass = require('./EventedClass');
+var core = require('./core');
+var ready = require('./ready');
+ready.whenReady.done(function () {
+    if (core.isAvailable())
+        window.open = cordova.InAppBrowser.open;
+});
 var BrowserRequest = (function (_super) {
     __extends(BrowserRequest, _super);
     function BrowserRequest(url) {
