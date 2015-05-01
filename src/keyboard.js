@@ -1,4 +1,4 @@
-define(function (require, exports, module) {/**
+/**
  * Keyboard helpers
  *
  * Requires:
@@ -117,6 +117,4 @@ window.addEventListener('native.keyboardhide', function () {
     exports.currentState.keyboardHeight = null;
     exports.currentState.focusedElement = null;
     exports.currentState.trigger(exports.CHANGED_EVENT, exports.currentState);
-});
-
 });

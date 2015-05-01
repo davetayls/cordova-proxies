@@ -1,4 +1,4 @@
-define(function (require, exports, module) {/***
+/***
  * Push notification helpers
  *
  * Requires:
@@ -8,5 +8,3 @@ define(function (require, exports, module) {/***
 /// <reference path="../typings/tsd.d.ts" />
 exports.noop = function () {
 };
-
-});
