@@ -1,4 +1,4 @@
-/**
+define(function (require, exports, module) {/**
  * Dialogs helpers
  *
  * Requires:
@@ -30,3 +30,5 @@ function confirm(message, confirmCallback, title, buttonLabels) {
     }
 }
 exports.confirm = confirm;
+
+});

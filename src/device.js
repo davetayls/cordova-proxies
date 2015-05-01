@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
 function isIOS() {
     return (/ios/i).test(device.platform);
 }
@@ -15,3 +15,5 @@ function isAndroidBased() {
     return isAndroid() || isAmazonFireOS();
 }
 exports.isAndroidBased = isAndroidBased;
+
+});

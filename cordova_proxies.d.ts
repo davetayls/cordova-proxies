@@ -6,6 +6,7 @@ declare module 'cordova_proxies' {
     export import browser = require('__cordova_proxies/browser');
     export import core = require('__cordova_proxies/core');
     export import device = require('__cordova_proxies/device');
+    export import dialogs = require('__cordova_proxies/dialogs');
     export import file = require('__cordova_proxies/file');
     export import keyboard = require('__cordova_proxies/keyboard');
     export import ready = require('__cordova_proxies/ready');
@@ -53,6 +54,17 @@ declare module '__cordova_proxies/device' {
     export function isAndroid(): boolean;
     export function isAmazonFireOS(): boolean;
     export function isAndroidBased(): boolean;
+}
+
+declare module '__cordova_proxies/dialogs' {
+    /**
+      * Dialogs helpers
+      *
+      * Requires:
+      * cordova plugin add cordova-plugin-dialogs --save
+      */
+    export function alert(message: string, cb: () => void, title?: string, buttonName?: string): void;
+    export function confirm(message: string, confirmCallback: (choice: number) => void, title?: string, buttonLabels?: string[]): void;
 }
 
 declare module '__cordova_proxies/file' {
