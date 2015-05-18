@@ -36,7 +36,7 @@ var BrowserRequest = (function (_super) {
             this.window.addEventListener('loaderror', this._onLoadError);
             this.window.addEventListener('loadstop', this._onLoadStop);
             this.window.addEventListener('exit', this._onExit);
-            this.window.addEventListener('close', this._onExit);
+            this.window.addEventListener('unload', this._onExit);
             return window.addEventListener('message', this._onPostMessage);
         }
     };
@@ -45,7 +45,7 @@ var BrowserRequest = (function (_super) {
         this.window.removeEventListener('loaderror', this._onLoadError);
         this.window.removeEventListener('loadstop', this._onLoadStop);
         this.window.removeEventListener('exit', this._onExit);
-        this.window.removeEventListener('close', this._onExit);
+        this.window.removeEventListener('unload', this._onExit);
     };
     BrowserRequest.prototype._onLoadStart = function (e) {
         this.trigger('load:start', e);
