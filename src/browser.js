@@ -19,6 +19,7 @@ var BrowserRequest = (function (_super) {
         _super.call(this);
         this.windowOptions = ['toolbarposition=top', 'hidden=yes', 'location=no', 'closebuttoncaption=Close', 'toolbar=yes'];
         this.windowTarget = '_blank';
+        this.windowCheckClosedIntervalLength = 500;
         this.openDelay = 1000;
         this.url = url;
         this.show = _.bind(this.show, this);
@@ -30,7 +31,7 @@ var BrowserRequest = (function (_super) {
         this._onLoadError = _.bind(this._onLoadError, this);
         this._onLoadStop = _.bind(this._onLoadStop, this);
         this._onExit = _.bind(this._onExit, this);
-        this.onUnload = _.bind(this.onUnload, this);
+        this.checkWindowClosed = _.bind(this.checkWindowClosed, this);
     }
     BrowserRequest.prototype._addWindowEvents = function () {
         if (this.window && this.window.addEventListener) {
@@ -38,7 +39,6 @@ var BrowserRequest = (function (_super) {
             this.window.addEventListener('loaderror', this._onLoadError);
             this.window.addEventListener('loadstop', this._onLoadStop);
             this.window.addEventListener('exit', this._onExit);
-            this.window.addEventListener('unload', this.onUnload);
             return window.addEventListener('message', this._onPostMessage);
         }
     };
@@ -47,7 +47,8 @@ var BrowserRequest = (function (_super) {
         this.window.removeEventListener('loaderror', this._onLoadError);
         this.window.removeEventListener('loadstop', this._onLoadStop);
         this.window.removeEventListener('exit', this._onExit);
-        this.window.removeEventListener('unload', this.onUnload);
+        if (this.windowCheckClosedIntervalId)
+            clearInterval(this.windowCheckClosedIntervalId);
     };
     BrowserRequest.prototype._onLoadStart = function (e) {
         this.trigger('load:start', e);
@@ -70,19 +71,23 @@ var BrowserRequest = (function (_super) {
         }
     };
     BrowserRequest.prototype._onExit = function (e) {
-        this.trigger('exit');
+        if (!this.hasExited) {
+            this.hasExited = true;
+            this.trigger('exit');
+        }
     };
-    BrowserRequest.prototype.onUnload = function () {
-        var _this = this;
-        setTimeout(function () {
-            if (_this.window.closed) {
-                _this.trigger('exit');
+    BrowserRequest.prototype.checkWindowClosed = function () {
+        if (this.window.closed) {
+            if (!this.hasExited) {
+                this.hasExited = true;
+                this.trigger('exit');
             }
-        }, 500);
+        }
     };
     BrowserRequest.prototype.open = function (url) {
         if (url === void 0) { url = this.url; }
         this.window = window.open(url, this.windowTarget, this.windowOptions.join(','));
+        this.windowCheckClosedIntervalId = setInterval(this.checkWindowClosed, this.windowCheckClosedIntervalLength);
         this._addWindowEvents();
         if (this.openDelay === 0) {
             this.show();
@@ -105,6 +110,7 @@ var BrowserRequest = (function (_super) {
         }
     };
     BrowserRequest.prototype.show = function () {
+        this.hasExited = false;
         if (this.window && this.window.show) {
             this.window.show();
             return this.trigger('show');
