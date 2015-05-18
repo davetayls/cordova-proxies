@@ -34,6 +34,7 @@ declare module '__cordova_proxies/browser' {
         window: IRequestWindow;
         windowShowTimeout: number;
         _addWindowEvents(): void;
+        removeWindowEvents(): void;
         _onLoadStart(e: InAppBrowserEvent): any;
         _onLoadStop(e: InAppBrowserEvent): any;
         _onLoadError(e: InAppBrowserEvent): any;
