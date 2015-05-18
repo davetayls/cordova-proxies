@@ -60,10 +60,12 @@ export class BrowserRequest extends EventedClass.EventedClass {
   }
 
   removeWindowEvents():void {
-    this.window.removeEventListener('loadstart', this._onLoadStart);
-    this.window.removeEventListener('loaderror', this._onLoadError);
-    this.window.removeEventListener('loadstop', this._onLoadStop);
-    this.window.removeEventListener('exit', this._onExit);
+    if (this.window && this.window.removeEventListener) {
+      this.window.removeEventListener('loadstart', this._onLoadStart);
+      this.window.removeEventListener('loaderror', this._onLoadError);
+      this.window.removeEventListener('loadstop', this._onLoadStop);
+      this.window.removeEventListener('exit', this._onExit);
+    }
     if (this.windowCheckClosedIntervalId) clearInterval(this.windowCheckClosedIntervalId);
   }
 

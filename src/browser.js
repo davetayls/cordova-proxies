@@ -1,4 +1,4 @@
-define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -43,10 +43,12 @@ var BrowserRequest = (function (_super) {
         }
     };
     BrowserRequest.prototype.removeWindowEvents = function () {
-        this.window.removeEventListener('loadstart', this._onLoadStart);
-        this.window.removeEventListener('loaderror', this._onLoadError);
-        this.window.removeEventListener('loadstop', this._onLoadStop);
-        this.window.removeEventListener('exit', this._onExit);
+        if (this.window && this.window.removeEventListener) {
+            this.window.removeEventListener('loadstart', this._onLoadStart);
+            this.window.removeEventListener('loaderror', this._onLoadError);
+            this.window.removeEventListener('loadstop', this._onLoadStop);
+            this.window.removeEventListener('exit', this._onExit);
+        }
         if (this.windowCheckClosedIntervalId)
             clearInterval(this.windowCheckClosedIntervalId);
     };
@@ -119,5 +121,3 @@ var BrowserRequest = (function (_super) {
     return BrowserRequest;
 })(EventedClass.EventedClass);
 exports.BrowserRequest = BrowserRequest;
-
-});
