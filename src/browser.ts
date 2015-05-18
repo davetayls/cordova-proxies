@@ -24,6 +24,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
     super();
     this.windowOptions = ['toolbarposition=top', 'hidden=yes', 'location=no', 'closebuttoncaption=Close', 'toolbar=yes'];
     this.windowTarget = '_blank';
+    this.windowCheckClosedIntervalLength = 500;
     this.openDelay = 1000;
     this.url = url;
     this.show = _.bind(this.show, this);
@@ -35,7 +36,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
     this._onLoadError = _.bind(this._onLoadError, this);
     this._onLoadStop = _.bind(this._onLoadStop, this);
     this._onExit = _.bind(this._onExit, this);
-    this.onUnload = _.bind(this.onUnload, this);
+    this.checkWindowClosed = _.bind(this.checkWindowClosed, this);
   }
 
   url:string;
@@ -44,6 +45,9 @@ export class BrowserRequest extends EventedClass.EventedClass {
   openDelay:number;
   window:IRequestWindow;
   windowShowTimeout:number;
+  windowCheckClosedIntervalLength:number;
+  private windowCheckClosedIntervalId:number;
+  private hasExited:boolean;
 
   _addWindowEvents() {
     if (this.window && this.window.addEventListener) {
@@ -51,7 +55,6 @@ export class BrowserRequest extends EventedClass.EventedClass {
       this.window.addEventListener('loaderror', this._onLoadError);
       this.window.addEventListener('loadstop', this._onLoadStop);
       this.window.addEventListener('exit', this._onExit);
-      this.window.addEventListener('unload', this.onUnload);
       return window.addEventListener('message', this._onPostMessage);
     }
   }
@@ -61,7 +64,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
     this.window.removeEventListener('loaderror', this._onLoadError);
     this.window.removeEventListener('loadstop', this._onLoadStop);
     this.window.removeEventListener('exit', this._onExit);
-    this.window.removeEventListener('unload', this.onUnload);
+    if (this.windowCheckClosedIntervalId) clearInterval(this.windowCheckClosedIntervalId);
   }
 
   _onLoadStart(e:InAppBrowserEvent) {
@@ -88,19 +91,24 @@ export class BrowserRequest extends EventedClass.EventedClass {
   }
 
   _onExit(e:InAppBrowserEvent) {
-    this.trigger('exit');
+    if (!this.hasExited) {
+      this.hasExited = true;
+      this.trigger('exit');
+    }
   }
 
-  private onUnload():void {
-    setTimeout(() => {
-      if (this.window.closed) {
+  private checkWindowClosed():void {
+    if (this.window.closed) {
+      if (!this.hasExited) {
+        this.hasExited = true;
         this.trigger('exit');
       }
-    }, 500);
+    }
   }
 
   open(url:string = this.url) {
     this.window = window.open(url, this.windowTarget, this.windowOptions.join(','));
+    this.windowCheckClosedIntervalId = setInterval(this.checkWindowClosed, this.windowCheckClosedIntervalLength);
     this._addWindowEvents();
     if (this.openDelay === 0) {
       this.show();
@@ -123,6 +131,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
   }
 
   show() {
+    this.hasExited = false;
     if (this.window && this.window.show) {
       this.window.show();
       return this.trigger('show');
