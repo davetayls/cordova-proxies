@@ -29,17 +29,18 @@ declare module '__cordova_proxies/browser' {
     export class BrowserRequest extends EventedClass.EventedClass {
         constructor(url: string);
         url: string;
+        windowTarget: string;
         windowOptions: string[];
         openDelay: number;
         window: IRequestWindow;
         windowShowTimeout: number;
         _addWindowEvents(): void;
         removeWindowEvents(): void;
-        _onLoadStart(e: InAppBrowserEvent): any;
-        _onLoadStop(e: InAppBrowserEvent): any;
-        _onLoadError(e: InAppBrowserEvent): any;
-        _onPostMessage(e: IPostMessageEvent): any;
-        _onExit(e: InAppBrowserEvent): any;
+        _onLoadStart(e: InAppBrowserEvent): void;
+        _onLoadStop(e: InAppBrowserEvent): void;
+        _onLoadError(e: InAppBrowserEvent): void;
+        _onPostMessage(e: IPostMessageEvent): void;
+        _onExit(e: InAppBrowserEvent): void;
         open(url?: string): number;
         close(): void;
         show(): any;

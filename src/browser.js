@@ -18,6 +18,7 @@ var BrowserRequest = (function (_super) {
     function BrowserRequest(url) {
         _super.call(this);
         this.windowOptions = ['toolbarposition=top', 'hidden=yes', 'location=no', 'closebuttoncaption=Close', 'toolbar=yes'];
+        this.windowTarget = '_blank';
         this.openDelay = 1000;
         this.url = url;
         this.show = _.bind(this.show, this);
@@ -29,6 +30,7 @@ var BrowserRequest = (function (_super) {
         this._onLoadError = _.bind(this._onLoadError, this);
         this._onLoadStop = _.bind(this._onLoadStop, this);
         this._onExit = _.bind(this._onExit, this);
+        this.onUnload = _.bind(this.onUnload, this);
     }
     BrowserRequest.prototype._addWindowEvents = function () {
         if (this.window && this.window.addEventListener) {
@@ -36,7 +38,7 @@ var BrowserRequest = (function (_super) {
             this.window.addEventListener('loaderror', this._onLoadError);
             this.window.addEventListener('loadstop', this._onLoadStop);
             this.window.addEventListener('exit', this._onExit);
-            this.window.addEventListener('unload', this._onExit);
+            this.window.addEventListener('unload', this.onUnload);
             return window.addEventListener('message', this._onPostMessage);
         }
     };
@@ -45,34 +47,42 @@ var BrowserRequest = (function (_super) {
         this.window.removeEventListener('loaderror', this._onLoadError);
         this.window.removeEventListener('loadstop', this._onLoadStop);
         this.window.removeEventListener('exit', this._onExit);
-        this.window.removeEventListener('unload', this._onExit);
+        this.window.removeEventListener('unload', this.onUnload);
     };
     BrowserRequest.prototype._onLoadStart = function (e) {
         this.trigger('load:start', e);
-        return this.trigger('load:progress', e);
+        this.trigger('load:progress', e);
     };
     BrowserRequest.prototype._onLoadStop = function (e) {
-        return this.trigger('load:stop', e);
+        this.trigger('load:stop', e);
     };
     BrowserRequest.prototype._onLoadError = function (e) {
         if (e.code === -999) {
-            return this.trigger('load:cancelled', e);
+            this.trigger('load:cancelled', e);
         }
         else {
-            return this.trigger('load:error', e);
+            this.trigger('load:error', e);
         }
     };
     BrowserRequest.prototype._onPostMessage = function (e) {
         if (e.source === this.window) {
-            return this.trigger('load:progress', e.data);
+            this.trigger('load:progress', e.data);
         }
     };
     BrowserRequest.prototype._onExit = function (e) {
-        return this.trigger('exit');
+        this.trigger('exit');
+    };
+    BrowserRequest.prototype.onUnload = function () {
+        var _this = this;
+        setTimeout(function () {
+            if (_this.window.closed) {
+                _this.trigger('exit');
+            }
+        }, 500);
     };
     BrowserRequest.prototype.open = function (url) {
         if (url === void 0) { url = this.url; }
-        this.window = window.open(url, '_blank', this.windowOptions.join(','));
+        this.window = window.open(url, this.windowTarget, this.windowOptions.join(','));
         this._addWindowEvents();
         if (this.openDelay === 0) {
             this.show();
