@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+define(function (require, exports, module) {/// <reference path="../typings/tsd.d.ts" />
 var $ = require('jquery');
 var splashscreen = require('./splashscreen');
 var d = $.Deferred();
@@ -11,3 +11,5 @@ if (typeof cordova === 'undefined') {
     $(d.resolve);
 }
 exports.whenReady = d.promise();
+
+});
