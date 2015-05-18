@@ -30,6 +30,10 @@ export class BrowserRequest extends EventedClass.EventedClass {
     this.open = _.bind(this.open, this);
     this._onPostMessage = _.bind(this._onPostMessage, this);
     this._addWindowEvents = _.bind(this._addWindowEvents, this);
+    this._onLoadStart = _.bind(this._onLoadStart, this);
+    this._onLoadError = _.bind(this._onLoadError, this);
+    this._onLoadStop = _.bind(this._onLoadStop, this);
+    this._onExit = _.bind(this._onExit, this);
   }
 
   url:string;
@@ -40,12 +44,21 @@ export class BrowserRequest extends EventedClass.EventedClass {
 
   _addWindowEvents() {
     if (this.window && this.window.addEventListener) {
-      this.window.addEventListener('loadstart', this._onLoadStart.bind(this));
-      this.window.addEventListener('loaderror', this._onLoadError.bind(this));
-      this.window.addEventListener('loadstop', this._onLoadStop.bind(this));
-      this.window.addEventListener('exit', this._onExit.bind(this));
+      this.window.addEventListener('loadstart', this._onLoadStart);
+      this.window.addEventListener('loaderror', this._onLoadError);
+      this.window.addEventListener('loadstop', this._onLoadStop);
+      this.window.addEventListener('exit', this._onExit);
+      this.window.addEventListener('close', this._onExit);
       return window.addEventListener('message', this._onPostMessage);
     }
+  }
+
+  removeWindowEvents():void {
+    this.window.removeEventListener('loadstart', this._onLoadStart);
+    this.window.removeEventListener('loaderror', this._onLoadError);
+    this.window.removeEventListener('loadstop', this._onLoadStop);
+    this.window.removeEventListener('exit', this._onExit);
+    this.window.removeEventListener('close', this._onExit);
   }
 
   _onLoadStart(e:InAppBrowserEvent) {
@@ -89,6 +102,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
     if (this.window) {
       clearTimeout(this.windowShowTimeout);
       window.removeEventListener('message', this._onPostMessage);
+      this.removeWindowEvents();
       try {
         return this.window.close();
       } finally {
