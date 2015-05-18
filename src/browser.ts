@@ -23,6 +23,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
   constructor(url:string) {
     super();
     this.windowOptions = ['toolbarposition=top', 'hidden=yes', 'location=no', 'closebuttoncaption=Close', 'toolbar=yes'];
+    this.windowTarget = '_blank';
     this.openDelay = 1000;
     this.url = url;
     this.show = _.bind(this.show, this);
@@ -34,9 +35,11 @@ export class BrowserRequest extends EventedClass.EventedClass {
     this._onLoadError = _.bind(this._onLoadError, this);
     this._onLoadStop = _.bind(this._onLoadStop, this);
     this._onExit = _.bind(this._onExit, this);
+    this.onUnload = _.bind(this.onUnload, this);
   }
 
   url:string;
+  windowTarget:string;
   windowOptions:string[];
   openDelay:number;
   window:IRequestWindow;
@@ -48,7 +51,7 @@ export class BrowserRequest extends EventedClass.EventedClass {
       this.window.addEventListener('loaderror', this._onLoadError);
       this.window.addEventListener('loadstop', this._onLoadStop);
       this.window.addEventListener('exit', this._onExit);
-      this.window.addEventListener('unload', this._onExit);
+      this.window.addEventListener('unload', this.onUnload);
       return window.addEventListener('message', this._onPostMessage);
     }
   }
@@ -58,38 +61,46 @@ export class BrowserRequest extends EventedClass.EventedClass {
     this.window.removeEventListener('loaderror', this._onLoadError);
     this.window.removeEventListener('loadstop', this._onLoadStop);
     this.window.removeEventListener('exit', this._onExit);
-    this.window.removeEventListener('unload', this._onExit);
+    this.window.removeEventListener('unload', this.onUnload);
   }
 
   _onLoadStart(e:InAppBrowserEvent) {
     this.trigger('load:start', e);
-    return this.trigger('load:progress', e);
+    this.trigger('load:progress', e);
   }
 
   _onLoadStop(e:InAppBrowserEvent) {
-    return this.trigger('load:stop', e);
+    this.trigger('load:stop', e);
   }
 
   _onLoadError(e:InAppBrowserEvent) {
     if (e.code === -999) {
-      return this.trigger('load:cancelled', e);
+      this.trigger('load:cancelled', e);
     } else {
-      return this.trigger('load:error', e);
+      this.trigger('load:error', e);
     }
   }
 
   _onPostMessage(e:IPostMessageEvent) {
     if (e.source === this.window) {
-      return this.trigger('load:progress', e.data);
+      this.trigger('load:progress', e.data);
     }
   }
 
   _onExit(e:InAppBrowserEvent) {
-    return this.trigger('exit');
+    this.trigger('exit');
+  }
+
+  private onUnload():void {
+    setTimeout(() => {
+      if (this.window.closed) {
+        this.trigger('exit');
+      }
+    }, 500);
   }
 
   open(url:string = this.url) {
-    this.window = window.open(url, '_blank', this.windowOptions.join(','));
+    this.window = window.open(url, this.windowTarget, this.windowOptions.join(','));
     this._addWindowEvents();
     if (this.openDelay === 0) {
       this.show();
