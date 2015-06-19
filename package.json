@@ -1,6 +1,6 @@
 {
   "name": "cordova_proxies",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Proxy libraries for working with device capabilities in cordova",
   "main": "src/index.coffee",
   "scripts": {

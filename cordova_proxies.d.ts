@@ -4,6 +4,7 @@
 
 declare module 'cordova_proxies' {
     export import browser = require('__cordova_proxies/browser');
+    export import camera = require('__cordova_proxies/camera');
     export import core = require('__cordova_proxies/core');
     export import device = require('__cordova_proxies/device');
     export import dialogs = require('__cordova_proxies/dialogs');
@@ -46,6 +47,12 @@ declare module '__cordova_proxies/browser' {
         close(): void;
         show(): any;
     }
+}
+
+declare module '__cordova_proxies/camera' {
+    export function isAvailable(): boolean;
+    export function getPicture(success: (url: string) => void, error: (errString: string) => void, options: CameraOptions): void;
+    export function getVideoMediaStream(width: number, height: number): HTMLVideoElement;
 }
 
 declare module '__cordova_proxies/core' {

@@ -1,5 +1,6 @@
 
 export import browser = require('./browser');
+export import camera = require('./camera');
 export import core = require('./core');
 export import device = require('./device');
 export import dialogs = require('./dialogs');

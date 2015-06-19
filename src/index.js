@@ -1,4 +1,5 @@
 define(function (require, exports, module) {exports.browser = require('./browser');
+exports.camera = require('./camera');
 exports.core = require('./core');
 exports.device = require('./device');
 exports.dialogs = require('./dialogs');
