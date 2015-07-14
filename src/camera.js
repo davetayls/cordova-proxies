@@ -18,7 +18,6 @@ function getPicture(success, error, options) {
 exports.getPicture = getPicture;
 function getVideoMediaStream(width, height) {
     var video = document.createElement('video');
-    var URL = window.URL;
     if (nav.getUserMedia) {
         var options = {
             audio: true,

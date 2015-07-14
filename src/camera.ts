@@ -26,7 +26,6 @@ export function getPicture(success:(url:string)=>void,
 
 export function getVideoMediaStream(width:number, height:number):HTMLVideoElement {
   var video = document.createElement('video');
-  var URL:any = (<any>window).URL;
   if (nav.getUserMedia) {
     var options = {
       audio: true,

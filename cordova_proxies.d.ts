@@ -79,6 +79,14 @@ declare module '__cordova_proxies/dialogs' {
 
 declare module '__cordova_proxies/file' {
     export function syncLocal(name: string, url: string, opts: any, cb: (err: FileTransferError, url?: string) => void): void;
+    export function createFileFromDataUrl(fs: FileSystem, fileName: string, dataUrl: string, successHandler: (fileSystemUrl: string) => void, errorHandler: (error: any) => void): void;
+    /**
+      * Creates and returns a blob from a data URL (either base64 encoded or not).
+      *
+      * @param {string} dataURL The data URL to convert.
+      * @return {Blob} A blob representing the array buffer data.
+      */
+    export function dataURLToBlob(dataURL: string): Blob;
 }
 
 declare module '__cordova_proxies/keyboard' {
