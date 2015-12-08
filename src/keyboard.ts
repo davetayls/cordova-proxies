@@ -28,6 +28,13 @@ export class KeyboardState extends EventedClass.EventedClass {
   keyboardIsOpen:boolean;
   keyboardHeight:number;
   focusedElement:JQuery;
+
+  toJSON() {
+    return {
+      keyboardIsOpen: this.keyboardIsOpen,
+      keyboardHeight: this.keyboardHeight
+    }
+  }
 }
 
 export var currentState = new KeyboardState();
