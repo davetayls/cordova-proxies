@@ -28,6 +28,12 @@ var KeyboardState = (function (_super) {
         this.focusedElement = null;
         _super.call(this);
     }
+    KeyboardState.prototype.toJSON = function () {
+        return {
+            keyboardIsOpen: this.keyboardIsOpen,
+            keyboardHeight: this.keyboardHeight
+        };
+    };
     return KeyboardState;
 })(EventedClass.EventedClass);
 exports.KeyboardState = KeyboardState;

@@ -97,6 +97,10 @@ declare module '__cordova_proxies/keyboard' {
             keyboardIsOpen: boolean;
             keyboardHeight: number;
             focusedElement: JQuery;
+            toJSON(): {
+                    keyboardIsOpen: boolean;
+                    keyboardHeight: number;
+            };
     }
     export var currentState: KeyboardState;
     export var activeEl: Element;
